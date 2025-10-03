@@ -6,7 +6,7 @@ prime = [True for i in range(max_number + 1)]
 
 p = 2
 while (p * p <= max_number):
-    if (prime[p] == True):
+    if (prime[p]):
         for i in range(p * p, max_number + 1, p):
             prime[i] = False
     p += 1
