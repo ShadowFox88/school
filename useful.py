@@ -6,29 +6,41 @@ class Choice:
         self.func = func
         self.string = string
 
-def choose(choices: list[Choice]):
-    max_length = max([len(i.string) for i in choices])
-    
-    string = "'" * ((int(math.log10(len(choices))) + 1) + max_length + 6)
-    string += "\n"
+class Chooser:
+    def __init__(self):
+        self.choices: list[Choice] = []
 
-    for idx, i in enumerate(choices):
-        temp = f"' {str(idx + 1).zfill((int(math.log10(len(choices))) + 1))}. {i.string}"
-        string += temp + f"{' '}" * (((int(math.log10(len(choices))) + 1) + max_length + 5) - len(temp)) + "'\n"
+    def add_choice(self, func: Callable, string: str):
+        self.choices.append(Choice(func, string))
 
-    string += "'" * ((int(math.log10(len(choices))) + 1) + max_length + 6)
+    def choose(self):
+        choices = self.choices + [Choice(lambda: None, "Exit")]
+        max_length = max([len(i.string) for i in choices])
+        
+        string = "'" * ((int(math.log10(len(choices))) + 1) + max_length + 6)
+        string += "\n"
 
-    string += "\n\nPlease choose which function to run: "
-    value = input(string)
+        for idx, i in enumerate(choices):
+            temp = f"' {str(idx + 1).zfill((int(math.log10(len(choices))) + 1))}. {i.string}"
+            string += temp + f"{' '}" * (((int(math.log10(len(choices))) + 1) + max_length + 5) - len(temp)) + "'\n"
 
-    try:
-        value = int(value)
-    except ValueError:
-        print("You didn't give a number.")
+        string += "'" * ((int(math.log10(len(choices))) + 1) + max_length + 6)
 
-    if value > len(choices):
-        print("Your number was too big.")
-    elif value <= 0:
-        print("Your number was too small.")
+        string += "\n\nPlease choose which function to run: "
+        value = input(string)
 
-    print(choices[value - 1].func())
+        try:
+            value = int(value)
+        except ValueError:
+            print("You didn't give a number.")
+
+        if value > len(choices):
+            print("Your number was too big.")
+        elif value <= 0:
+            print("Your number was too small.")
+
+        return_value = choices[value - 1].func()
+
+        if return_value:
+            print(return_value)
+        
