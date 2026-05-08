@@ -1,0 +1,1 @@
+This repo contains various programming projects we have had to do in school. This is by no means exhaustive and doesn't include other school work done before Y12 (such as this [CardGame](https://github.com/ShadowFox88/CardGame) and other work deleted from repl.it after its changes).
