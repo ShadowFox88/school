@@ -42,20 +42,20 @@ def create_ordered_test(max, size):
 
 def bubble_sort(arr):
     passes = 0
-    l, r = 0, 1
+    l, r = 0, 1  # noqa: E741
 
     sorted = False
 
     while not sorted:
         sorted = True
-        l, r = 0, 1
+        l, r = 0, 1  # noqa: E741
         passes += 1
 
         while r <= len(arr) - 1:
             if arr[l] > arr[r]:
                 sorted = False
                 arr[l], arr[r] = arr[r], arr[l]
-            l, r = l + 1, r + 1
+            l, r = l + 1, r + 1  # noqa: E741
     
     print(f"took {passes} passes")
     return arr
